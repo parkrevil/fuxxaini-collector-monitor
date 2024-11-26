@@ -1,0 +1,11 @@
+nav {
+  @apply w-full;
+
+  ul {
+    @apply flex justify-center space-x-10;
+
+    li {
+      @apply flex;
+    }
+  }
+}
