@@ -1,9 +1,32 @@
-import { Injectable } from '@angular/core';
+import { SocketEvent } from '@/core/enums';
+import { inject, Injectable, OnDestroy } from '@angular/core';
+import { Socket } from 'ngx-socket-io';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class LogService {
+@Injectable()
+export class LogService implements OnDestroy {
+  private socket = inject(Socket);
+  private socketEvents = new Map<SocketEvent, Function>([
+    [SocketEvent.LogCreate, this.onCreate.bind(this)],
+    [SocketEvent.LogUpdate, this.onUpdate.bind(this)],
+  ]);
 
-  constructor() { }
+  constructor() {
+    this.socketEvents.forEach((v, k) => {
+      this.socket.on(k, v);
+    });
+  }
+
+  ngOnDestroy() {
+    this.socketEvents.forEach((v, k) => {
+      this.socket.removeAllListeners(k);
+    });
+  }
+
+  private onCreate() {
+    console.log('onCreate');
+  }
+
+  private onUpdate() {
+    console.log('onUpdate');
+  }
 }

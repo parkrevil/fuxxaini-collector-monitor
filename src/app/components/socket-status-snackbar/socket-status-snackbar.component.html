@@ -1,0 +1,8 @@
+@let icon = isConnect() ? 'check_circle' : 'error';
+@let message = isConnect() ? 'Socket connected' : 'Socket connection failed';
+
+<div class="flex flex-row items-center" MatSnackBarLabel>
+  <mat-icon [fontIcon]="icon"></mat-icon>
+
+  <span class="ml-2">{{ message }}</span>
+</div>
