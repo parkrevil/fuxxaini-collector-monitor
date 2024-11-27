@@ -1,6 +1,6 @@
+import { Socket } from '@/core/classes/socket';
 import { SocketEvent } from '@/core/enums';
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
 
 @Injectable()
 export class LogService implements OnDestroy {
